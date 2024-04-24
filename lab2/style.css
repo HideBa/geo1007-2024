@@ -1,5 +1,5 @@
 body {
-  background: #f9e933;
+  background: lightgray;
 }
 
 header,
@@ -51,6 +51,15 @@ ul {
 
 p {
   border: #f9e933 solid 5px;
+  margin: 20px;
+}
+
+li:hover {
+  color: gray;
+}
+
+a:hover {
+  color: yellow;
 }
 
 .list-a {
