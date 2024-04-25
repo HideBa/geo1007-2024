@@ -110,6 +110,7 @@ var allFunctions = function () {
         textarea.cols = "60";
         textarea.style.border = "solid 1px black";
         textarea.textContent = this.responseText;
+        document.querySelector("main .forDebug2").innerHTML = "";
         document.querySelector("main .forDebug2").append(textarea);
         var xmlData = this.responseXML;
         handleXMLResponse(xmlData);
@@ -129,6 +130,7 @@ var allFunctions = function () {
   var handleXMLResponse = function (data) {
     var feature = data.getElementsByTagName("intersection")[0];
     if (typeof feature !== "undefined" && feature.childNodes.length > 0) {
+      document.querySelector("#xmlDataAsTable").innerHTML = "";
       var headerRow = document.createElement("tr");
       headerRow.innerHTML = "<th>Property name</th><th>value</th>";
       document.querySelector("#xmlDataAsTable").append(headerRow);
@@ -158,7 +160,10 @@ var allFunctions = function () {
     var img = document.createElement("img");
     img.style.display = "none";
     img.src = wms_request;
-    document.querySelector("main .mapDiv").append(img);
+    //remove old element
+    const mapDiv = document.querySelector("main .mapDiv");
+    mapDiv.innerHTML = "";
+    mapDiv.append(img);
     img.style.display = "block";
   };
 
@@ -268,7 +273,7 @@ var allFunctions = function () {
     }
 
     if (event.target.matches("input.theButton1")) {
-      console.log("a button with class theButton1 clicked");
+      console.log("a button with class theButton1 clicked!!!!");
 
       var lat, lng;
       var children = event.target.parentNode.parentNode.children;
@@ -282,6 +287,7 @@ var allFunctions = function () {
         }
       }
 
+
       children = event.target.parentNode.parentNode.children;
       for (var i = 0; i < children.length; i++) {
         let elem = children[i];
@@ -291,7 +297,6 @@ var allFunctions = function () {
           break;
         }
       }
-
       // let lat = 0
       // let lng = 0
       requestWMSmap(lat, lng);
