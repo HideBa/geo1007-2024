@@ -135,15 +135,15 @@
     // mdv 2018 geoweb course: switch default osmbuildings vector layer off
     //osmb.addGeoJSONTiles('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
-    var url_wfs = 'https://varioscale.bk.tudelft.nl/geoserver/nl/ows?';
-    var featuretype = 'nl:building';
-    var geometryName = 'nl:the_geom';
-    // These are the basic parameters for a WFS request 
-    //var params = 'service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326';
+    var url_wfs = 'http://localhost:8080/geoserver/lab34/ows?';
+    var featuretype = 'lab34%3Apand_2d_4326';
+    var geometryName = 'lab34:the_geom';
+    // These are the basic parameters for a WFS request
+
     var params = 'service=WFS&version=1.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326';
     // also needed: specify the WFS feature type that you request from the WFS service
     params += '&typeName=' + featuretype;
-    // and the geometry property and the height (for on-the-fly extrusion by OSM)	
+    // and the geometry property and the height (for on-the-fly extrusion by OSM)
     params += '&propertyName=' + geometryName + ',height';
     // and in this use case the bouwjaar (= year that building was constructed)
     params += ',bouwjaar';
@@ -151,10 +151,10 @@
     params += '&cql_filter=t{z}_x \= {x} and t{z}_y \= {y}';
 
     // possibility to add another selection criterion, like so
-    //params += ' and bouwjaar \< 1850';
+    params += ' and bouwjaar \< 1650 or bouwjaar \> 2000 ';
 
 
-    // options for OSM addGeoJSONTiles 
+    // options for OSM addGeoJSONTiles
     options.fixedZoom = 15;
     options.modifier = function (id, properties) {
       var bouwjaar = properties['bouwjaar'];
